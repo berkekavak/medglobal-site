@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedGlobal Health — Premium Medical Tourism in Turkey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --teal-900: #0a2f2f;
+            --teal-800: #0d3b3b;
+            --teal-700: #115e5e;
+            --teal-600: #148585;
+            --teal-500: #17a2a2;
+            --teal-400: #2ec4c4;
+            --teal-300: #5fd4d4;
+            --teal-100: #ccf0f0;
+            --gold-500: #c9a84c;
+            --gold-400: #dbbf6a;
+            --gold-300: #e8d494;
+            --cream: #f9f7f2;
+            --white: #ffffff;
+            --gray-50: #f8fafb;
+            --gray-100: #eef2f3;
+            --gray-200: #dce3e5;
+            --gray-400: #8fa3a8;
+            --gray-600: #4a6066;
+            --gray-800: #1e3338;
+            --shadow-sm: 0 1px 3px rgba(10,47,47,0.06);
+            --shadow-md: 0 4px 20px rgba(10,47,47,0.08);
+            --shadow-lg: 0 12px 40px rgba(10,47,47,0.12);
+            --shadow-xl: 0 24px 60px rgba(10,47,47,0.16);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--gray-800);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== UTILITY ===== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--teal-500);
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            color: var(--teal-900);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--gray-600);
+            max-width: 560px;
+            line-height: 1.7;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(10,47,47,0.06);
+            transition: all 0.3s;
+        }
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, var(--teal-600), var(--teal-400));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(20,133,133,0.3);
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--teal-900);
+        }
+        .logo-text span { color: var(--gold-500); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--teal-600); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: var(--teal-500);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--teal-600), var(--teal-500));
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 16px rgba(20,133,133,0.3);
+            transition: all 0.3s !important;
+        }
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(20,133,133,0.4);
+        }
+        .nav-cta::after { display: none !important; }
+
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border: 1px solid var(--gray-200);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-switch:hover {
+            border-color: var(--teal-400);
+            color: var(--teal-600);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .mobile-toggle span {
+            width: 24px; height: 2px;
+            background: var(--teal-900);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(165deg, var(--cream) 0%, var(--white) 40%, var(--teal-100) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px; right: -200px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(20,133,133,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px; left: -100px;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(20,133,133,0.08);
+            border: 1px solid rgba(20,133,133,0.15);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--teal-700);
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease;
+        }
+        .hero-badge .dot {
+            width: 8px; height: 8px;
+            background: var(--teal-400);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 700;
+            color: var(--teal-900);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--teal-500);
+            position: relative;
+        }
+        .hero h1 em::after {
+            content: '';
+            position: absolute;
+            bottom: 2px; left: 0; right: 0;
+            height: 8px;
+            background: rgba(20,133,133,0.12);
+            border-radius: 4px;
+            z-index: -1;
+        }
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 36px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--teal-600), var(--teal-500));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(20,133,133,0.3);
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(20,133,133,0.4);
+        }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            background: white;
+            color: var(--teal-700);
+            border: 2px solid var(--gray-200);
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            border-color: var(--teal-400);
+            background: var(--teal-100);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+        .hero-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal-500), var(--gold-500));
+        }
+        .hero-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--teal-900);
+            margin-bottom: 6px;
+        }
+        .hero-card p {
+            color: var(--gray-400);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 6px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--gray-800);
+            background: var(--gray-50);
+            transition: all 0.2s;
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--teal-400);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(20,133,133,0.08);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .form-submit {
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 48px;
+            animation: fadeInUp 0.8s ease 0.5s both;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--teal-700);
+        }
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--gray-400);
+            font-weight: 500;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== TRUST BAR ===== */
+        .trust-bar {
+            padding: 40px 0;
+            background: var(--white);
+            border-top: 1px solid var(--gray-100);
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .trust-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--gray-400);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .trust-icon {
+            width: 44px; height: 44px;
+            background: var(--gray-50);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* ===== TREATMENTS ===== */
+        .treatments {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .treatments-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .treatments-header .section-subtitle {
+            margin: 0 auto;
+        }
+        .treatments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+        .treatment-card {
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .treatment-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 0;
+            background: linear-gradient(180deg, var(--teal-400), var(--teal-600));
+            transition: height 0.4s;
+        }
+        .treatment-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--teal-100);
+        }
+        .treatment-card:hover::before {
+            height: 100%;
+        }
+        .treatment-icon {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, rgba(20,133,133,0.08), rgba(20,133,133,0.03));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .treatment-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--teal-900);
+            margin-bottom: 8px;
+        }
+        .treatment-card p {
+            font-size: 0.88rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .treatment-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--teal-600);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.3s;
+        }
+        .treatment-link:hover { gap: 10px; }
+
+        /* ===== HOSPITALS ===== */
+        .hospitals {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
+        }
+        .hospitals-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .hospitals-header .section-subtitle { margin: 0 auto; }
+        .hospitals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .hospital-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s;
+        }
+        .hospital-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+        .hospital-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hospital-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(10,47,47,0.4));
+        }
+        .hospital-badge {
+            position: absolute;
+            top: 16px; right: 16px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--teal-700);
+            z-index: 1;
+        }
+        .hospital-body {
+            padding: 28px;
+        }
+        .hospital-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--teal-900);
+            margin-bottom: 4px;
+        }
+        .hospital-location {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .hospital-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .hospital-features li {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .hospital-features li::before {
+            content: '✓';
+            color: var(--teal-500);
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        .hospital-cta {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: var(--gray-50);
+            color: var(--teal-700);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .hospital-cta:hover {
+            background: var(--teal-600);
+            color: white;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-it-works {
+            padding: 100px 0;
+            background: var(--teal-900);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .how-it-works::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 50%; height: 100%;
+            background: radial-gradient(ellipse at 80% 20%, rgba(20,133,133,0.2), transparent 70%);
+        }
+        .how-header {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+            z-index: 1;
+        }
+        .how-header .section-label { color: var(--teal-300); }
+        .how-header .section-title { color: white; }
+        .how-header .section-subtitle { color: rgba(255,255,255,0.6); margin: 0 auto; }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .step {
+            text-align: center;
+            padding: 32px 20px;
+            position: relative;
+        }
+        .step-num {
+            width: 56px; height: 56px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--teal-500), var(--teal-400));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 8px 24px rgba(20,133,133,0.3);
+        }
+        .step h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .step p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.6;
+        }
+
+        /* ===== WHY TURKEY ===== */
+        .why-turkey {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .why-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .why-content .section-subtitle { margin-bottom: 36px; }
+        .why-features {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .why-feature {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .why-feature-icon {
+            flex-shrink: 0;
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, rgba(20,133,133,0.1), rgba(20,133,133,0.03));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .why-feature h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--teal-900);
+            margin-bottom: 2px;
+        }
+        .why-feature p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+        .why-visual {
+            position: relative;
+        }
+        .why-card-main {
+            background: linear-gradient(135deg, var(--teal-700), var(--teal-900));
+            border-radius: var(--radius-xl);
+            padding: 48px 36px;
+            color: white;
+        }
+        .price-comparison h4 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            opacity: 0.7;
+            margin-bottom: 24px;
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .price-row:last-child { border: none; }
+        .price-row .country {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .price-row .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .price-row.highlight {
+            background: rgba(46,196,196,0.15);
+            margin: 0 -20px;
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
+            border: none;
+        }
+        .price-row.highlight .price {
+            color: var(--teal-300);
+        }
+        .savings-badge {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: rgba(201,168,76,0.15);
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gold-300);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--gray-50);
+        }
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .testimonials-header .section-subtitle { margin: 0 auto; }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+        .testimonial-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+        .testimonial-stars {
+            color: var(--gold-500);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+        .testimonial-text {
+            font-size: 0.92rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .testimonial-avatar {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--teal-400), var(--teal-600));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .testimonial-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--teal-900);
+        }
+        .testimonial-origin {
+            font-size: 0.78rem;
+            color: var(--gray-400);
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .cta-card {
+            background: linear-gradient(135deg, var(--teal-800), var(--teal-900));
+            border-radius: var(--radius-xl);
+            padding: 72px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(201,168,76,0.1), transparent 60%);
+            border-radius: 50%;
+        }
+        .cta-card::after {
+            content: '';
+            position: absolute;
+            bottom: -30%; left: -10%;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(46,196,196,0.1), transparent 60%);
+            border-radius: 50%;
+        }
+        .cta-card .section-label { color: var(--gold-400); }
+        .cta-card .section-title { color: white; }
+        .cta-card .section-subtitle {
+            color: rgba(255,255,255,0.6);
+            margin: 0 auto 36px;
+        }
+        .cta-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--gold-500), var(--gold-400));
+            color: var(--teal-900);
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(201,168,76,0.3);
+            transition: all 0.3s;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(201,168,76,0.4);
+        }
+        .btn-outline-light {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.25);
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-outline-light:hover {
+            border-color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 60px 0 0;
+            background: var(--teal-900);
+            color: rgba(255,255,255,0.6);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .footer-brand .logo-text { color: white; }
+        .footer-desc {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-top: 16px;
+            margin-bottom: 24px;
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+        .footer-social a {
+            width: 40px; height: 40px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .footer-social a:hover {
+            background: var(--teal-600);
+            color: white;
+        }
+        .footer-col h4 {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-col a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover { color: var(--teal-300); }
+        .footer-bottom {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+        .footer-bottom a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+        }
+        .footer-bottom a:hover { color: var(--teal-300); }
+
+        /* ===== WHATSAPP FAB ===== */
+        .whatsapp-fab {
+            position: fixed;
+            bottom: 28px; right: 28px;
+            width: 60px; height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.7rem;
+            text-decoration: none;
+            box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+            z-index: 999;
+            transition: all 0.3s;
+            animation: fabBounce 2s ease infinite;
+        }
+        .whatsapp-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 32px rgba(37,211,102,0.5);
+        }
+        @keyframes fabBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,47,47,0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            max-width: 520px;
+            width: 100%;
+            position: relative;
+            animation: modalIn 0.4s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(24px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px; right: 16px;
+            width: 36px; height: 36px;
+            background: var(--gray-50);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .modal-close:hover { background: var(--gray-100); }
+        .modal h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--teal-900);
+            margin-bottom: 4px;
+        }
+        .modal > p {
+            color: var(--gray-400);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+        .modal .form-submit { width: 100%; }
+
+        /* Success state */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 24px 0;
+        }
+        .form-success.active { display: block; }
+        .form-success .check {
+            width: 64px; height: 64px;
+            background: linear-gradient(135deg, var(--teal-400), var(--teal-600));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.6rem;
+            color: white;
+        }
+        .form-success h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--teal-900);
+            margin-bottom: 8px;
+        }
+        .form-success p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hospitals-grid { grid-template-columns: repeat(2, 1fr); }
+            .steps { grid-template-columns: repeat(2, 1fr); }
+            .why-inner { grid-template-columns: 1fr; gap: 48px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+            .hero { padding: 120px 0 60px; }
+            .hero-stats { justify-content: center; }
+            .nav-links { display: none; }
+            .mobile-toggle { display: flex; }
+            .hospitals-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+            .form-row { grid-template-columns: 1fr; }
+            .cta-card { padding: 48px 24px; }
+            .trust-inner { gap: 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .steps { grid-template-columns: 1fr; }
+            .hero-stats { flex-direction: column; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+        <a href="#" class="logo">
+            <div class="logo-icon">M</div>
+            <div class="logo-text">Med<span>Global</span></div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#treatments">Treatments</a></li>
+            <li><a href="#hospitals">Our Hospitals</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#why-turkey">Why Turkey</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li>
+                <div class="lang-switch">🌐 EN ▾</div>
+            </li>
+            <li><a href="#" class="nav-cta" onclick="openModal(); return false;">Free Consultation</a></li>
+        </ul>
+        <div class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+    <div class="container">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Trusted by 15,000+ International Patients
+                </div>
+                <h1>World-Class Healthcare,<br><em>Affordable Prices</em></h1>
+                <p class="hero-desc">
+                    Get matched with Turkey's top accredited hospitals for your treatment. 
+                    Save up to 70% compared to US & European prices — with zero compromise on quality.
+                </p>
+                <div class="hero-actions">
+                    <a href="#" class="btn-primary" onclick="openModal(); return false;">
+                        Get Free Quote →
+                    </a>
+                    <a href="#how-it-works" class="btn-secondary">
+                        How It Works
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-num">15K+</div>
+                        <div class="stat-label">Happy Patients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">87+</div>
+                        <div class="stat-label">Countries Served</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">10+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">4.8</div>
+                        <div class="stat-label">Patient Rating</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <h3>Get Your Free Consultation</h3>
+                    <p>Receive a personalized treatment plan within 24 hours</p>
+                    <form id="heroForm" onsubmit="handleFormSubmit(event, 'heroForm')">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone / WhatsApp</label>
+                                <input type="tel" placeholder="+44 7123 456789" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Treatment Interest</label>
+                            <select required>
+                                <option value="">Select a treatment...</option>
+                                <option>Bariatric / Weight Loss Surgery</option>
+                                <option>Dental Implants & Smile Design</option>
+                                <option>Plastic & Aesthetic Surgery</option>
+                                <option>Hair Transplant</option>
+                                <option>Orthopedics & Spine Surgery</option>
+                                <option>Cardiology</option>
+                                <option>Eye Surgery / LASIK</option>
+                                <option>IVF & Fertility</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Brief Message (Optional)</label>
+                            <textarea rows="2" placeholder="Tell us about your condition..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary form-submit">
+                            Send My Free Consultation Request →
+                        </button>
+                    </form>
+                    <div class="form-success" id="heroFormSuccess">
+                        <div class="check">✓</div>
+                        <h4>Thank You!</h4>
+                        <p>Our medical team will contact you within 24 hours with your personalized treatment plan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TRUST BAR ===== -->
+<section class="trust-bar">
+    <div class="container">
+        <div class="trust-inner">
+            <div class="trust-item">
+                <div class="trust-icon">🏥</div>
+                <span>JCI Accredited Hospitals</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">👨‍⚕️</div>
+                <span>Board-Certified Surgeons</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🛡️</div>
+                <span>All-Inclusive Packages</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🌍</div>
+                <span>Multilingual Support</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">✈️</div>
+                <span>VIP Airport Transfer</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TREATMENTS ===== -->
+<section class="treatments" id="treatments">
+    <div class="container">
+        <div class="treatments-header">
+            <div class="section-label">Our Specialties</div>
+            <h2 class="section-title">Treatments We Offer</h2>
+            <p class="section-subtitle">From weight loss surgery to full smile makeovers — our partner hospitals cover a wide range of medical and aesthetic procedures.</p>
+        </div>
+        <div class="treatments-grid">
+            <div class="treatment-card">
+                <div class="treatment-icon">⚖️</div>
+                <h3>Bariatric Surgery</h3>
+                <p>Gastric sleeve, bypass & revision surgery with comprehensive aftercare programs.</p>
+                <a href="#" class="treatment-link" onclick="openModal(); return false;">Get a Quote →</a>
+            </div>
+            <div class="treatment-card">
+                <div class="treatment-icon">😁</div>
+                <h3>Dental Treatments</h3>
+                <p>Implants, veneers, crowns, Hollywood smile design with premium materials.</p>
+                <a href="#" class="treatment-link" onclick="openModal(); return false;">Get a Quote →</a>
+            </div>
+            <div class="treatment-card">
+                <div class="treatment-icon">✨</div>
+                <h3>Plastic Surgery</h3>
+                <p>Rhinoplasty, liposuction, breast surgery, facelifts by top surgeons.</p>
+                <a href="#" class="treatment-link" onclick="openModal(); return false;">Get a Quote →</a>
+            </div>
+            <div class="treatment-card">
+                <div class="treatment-icon">💇</div>
+                <h3>Hair Transplant</h3>
+                <p>FUE & DHI techniques with natural results and lifetime guarantees.</p>
+                <a href="#" class="treatment-link" onclick="openModal(); return false;">Get a Quote →</a>
+            </div>
+            <div class="treatment-card">
+                <div class="treatment-icon">🦴</div>
+                <h3>Orthopedics</h3>
+                <p>Joint replacement, spine surgery, sports medicine with rapid recovery.</p>
+                <a href="#" class="treatment-link" onclick="openModal(); return false;">Get a Quote →</a>
+            </div>
+            <div class="treatment-card">
+                <div class="treatment-icon">❤️</div>
+                <h3>Cardiology</h3>
+                <p>Heart surgery, angiography, valve replacement with cutting-edge technology.</p>
+                <a href="#" class="treatment-link" onclick="openModal(); return false;">Get a Quote →</a>
+            </div>
+            <div class="treatment-card">
+                <div class="treatment-icon">👁️</div>
+                <h3>Eye Surgery</h3>
+                <p>LASIK, cataract surgery, lens replacement for crystal-clear vision.</p>
+                <a href="#" class="treatment-link" onclick="openModal(); return false;">Get a Quote →</a>
+            </div>
+            <div class="treatment-card">
+                <div class="treatment-icon">👶</div>
+                <h3>IVF & Fertility</h3>
+                <p>Advanced fertility treatments with high success rates and personal care.</p>
+                <a href="#" class="treatment-link" onclick="openModal(); return false;">Get a Quote →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== HOSPITALS ===== -->
+<section class="hospitals" id="hospitals">
+    <div class="container">
+        <div class="hospitals-header">
+            <div class="section-label">Partner Hospitals</div>
+            <h2 class="section-title">Our Accredited Hospitals</h2>
+            <p class="section-subtitle">We work exclusively with İrmet Hospital — internationally accredited and equipped with the latest medical technology, serving patients from 87+ countries since 2012.</p>
+        </div>
+        <div class="hospitals-grid" style="grid-template-columns: 1fr; max-width: 500px; margin: 0 auto;">
+            <div class="hospital-card">
+                <div class="hospital-img" style="background: linear-gradient(135deg, #0d4f4f, #1a8a8a);">
+                    <div class="hospital-badge">Internationally Accredited</div>
+                    <div style="position:absolute; bottom:20px; left:24px; z-index:1; color:white; font-size:3rem; opacity:0.3;">🏥</div>
+                </div>
+                <div class="hospital-body">
+                    <h3>İrmet Hospital</h3>
+                    <div class="hospital-location">📍 Çerkezköy, Tekirdağ — Turkey</div>
+                    <ul class="hospital-features">
+                        <li>Serving international patients since 2012</li>
+                        <li>Patients from 87+ countries worldwide</li>
+                        <li>Specialized in obesity & plastic surgery</li>
+                        <li>128-slice CT, digital MRI & full laboratory</li>
+                        <li>24/7 multilingual patient support</li>
+                    </ul>
+                    <a href="#" class="hospital-cta" onclick="openModal(); return false;">Request Info →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="how-it-works" id="how-it-works">
+    <div class="container">
+        <div class="how-header">
+            <div class="section-label">Your Journey</div>
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">From your first inquiry to flying back home — we handle everything so you can focus on your health.</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Free Consultation</h3>
+                <p>Fill out the form and receive a personalized treatment plan with pricing within 24 hours.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>Plan Your Trip</h3>
+                <p>Choose your dates. We arrange flights, hotel, and VIP airport transfers for you.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Get Treated</h3>
+                <p>Arrive at your hospital, meet your surgeon, and undergo your procedure with 24/7 care.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <h3>Recover & Go Home</h3>
+                <p>Enjoy recovery support at your hotel, then fly home with ongoing follow-up care.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WHY TURKEY ===== -->
+<section class="why-turkey" id="why-turkey">
+    <div class="container">
+        <div class="why-inner">
+            <div class="why-content">
+                <div class="section-label">Why Choose Us</div>
+                <h2 class="section-title">Save Up to 70% on Medical Care</h2>
+                <p class="section-subtitle">Turkey is the world's #4 medical tourism destination — offering European-quality healthcare at a fraction of the cost.</p>
+                <div class="why-features">
+                    <div class="why-feature">
+                        <div class="why-feature-icon">💰</div>
+                        <div>
+                            <h4>Transparent Pricing</h4>
+                            <p>All-inclusive packages with no hidden fees. Hotel, transfers, and aftercare included.</p>
+                        </div>
+                    </div>
+                    <div class="why-feature">
+                        <div class="why-feature-icon">🎓</div>
+                        <div>
+                            <h4>Expert Surgeons</h4>
+                            <p>Board-certified doctors with international training and thousands of procedures performed.</p>
+                        </div>
+                    </div>
+                    <div class="why-feature">
+                        <div class="why-feature-icon">🏨</div>
+                        <div>
+                            <h4>Modern Facilities</h4>
+                            <p>JCI-accredited hospitals with the latest technology and equipment.</p>
+                        </div>
+                    </div>
+                    <div class="why-feature">
+                        <div class="why-feature-icon">🤝</div>
+                        <div>
+                            <h4>Personal Care Coordinator</h4>
+                            <p>A dedicated coordinator in your language from first contact to full recovery.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="why-visual">
+                <div class="why-card-main">
+                    <div class="price-comparison">
+                        <h4>Average Gastric Sleeve Cost Comparison</h4>
+                        <div class="price-row">
+                            <span class="country">🇺🇸 United States</span>
+                            <span class="price">$15,000 – $25,000</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="country">🇬🇧 United Kingdom</span>
+                            <span class="price">£8,000 – £12,000</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="country">🇩🇪 Germany</span>
+                            <span class="price">€9,000 – €15,000</span>
+                        </div>
+                        <div class="price-row highlight">
+                            <span class="country">🇹🇷 Turkey (MedGlobal)</span>
+                            <span class="price">€3,200 – €4,500</span>
+                        </div>
+                    </div>
+                    <div class="savings-badge">💎 Save up to 70% — All Inclusive</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="testimonials-header">
+            <div class="section-label">Patient Stories</div>
+            <h2 class="section-title">What Our Patients Say</h2>
+            <p class="section-subtitle">Join thousands of satisfied patients who trusted MedGlobal for their medical journey.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"From the moment I landed, everything was taken care of. The hospital was spotless, the surgeon was brilliant, and I saved over £7,000 compared to back home. Absolutely recommend!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">SM</div>
+                    <div>
+                        <div class="testimonial-name">Sarah M.</div>
+                        <div class="testimonial-origin">🇬🇧 London, UK — Gastric Sleeve</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"I was nervous about traveling for surgery, but the team made me feel safe. My dental implants look amazing and the whole trip was like a 5-star experience. I'll be back for more treatments!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MK</div>
+                    <div>
+                        <div class="testimonial-name">Michael K.</div>
+                        <div class="testimonial-origin">🇩🇪 Berlin, DE — Dental Implants</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"My rhinoplasty results exceeded my expectations. The surgeon was incredibly skilled and the recovery hotel was beautiful. The coordinator kept me informed at every step."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">AL</div>
+                    <div>
+                        <div class="testimonial-name">Anna L.</div>
+                        <div class="testimonial-origin">🇳🇱 Amsterdam, NL — Rhinoplasty</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-card">
+            <div class="section-label">Start Your Journey</div>
+            <h2 class="section-title">Ready to Transform Your Health?</h2>
+            <p class="section-subtitle">Get a free, no-obligation consultation and personalized treatment plan. Our medical team responds within 24 hours.</p>
+            <div class="cta-actions">
+                <a href="#" class="btn-gold" onclick="openModal(); return false;">Get Free Quote →</a>
+                <a href="https://wa.me/905551234567" class="btn-outline-light" target="_blank">💬 WhatsApp Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon">M</div>
+                    <div class="logo-text">Med<span>Global</span></div>
+                </a>
+                <p class="footer-desc">Connecting international patients with Turkey's top accredited hospitals. Premium healthcare, transparent pricing, and personalized care — all in one place.</p>
+                <div class="footer-social">
+                    <a href="#" title="Facebook">f</a>
+                    <a href="#" title="Instagram">ig</a>
+                    <a href="#" title="YouTube">▶</a>
+                    <a href="#" title="TikTok">♪</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Treatments</h4>
+                <ul>
+                    <li><a href="#">Bariatric Surgery</a></li>
+                    <li><a href="#">Dental Treatments</a></li>
+                    <li><a href="#">Plastic Surgery</a></li>
+                    <li><a href="#">Hair Transplant</a></li>
+                    <li><a href="#">Eye Surgery</a></li>
+                    <li><a href="#">IVF & Fertility</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Hospitals</a></li>
+                    <li><a href="#">Patient Stories</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="https://wa.me/905551234567">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 MedGlobal Health. All rights reserved.</span>
+            <a href="#">Privacy Policy</a>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== WHATSAPP FAB ===== -->
+<a href="https://wa.me/905551234567" class="whatsapp-fab" target="_blank" title="Chat on WhatsApp">💬</a>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <h3>Free Consultation</h3>
+        <p>Fill in your details and our medical team will reach out within 24 hours.</p>
+        <form id="modalForm" onsubmit="handleFormSubmit(event, 'modalForm')">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone / WhatsApp</label>
+                    <input type="tel" placeholder="+44 7123 456789" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group">
+                <label>Country</label>
+                <select required>
+                    <option value="">Select your country...</option>
+                    <option>United Kingdom</option>
+                    <option>Germany</option>
+                    <option>France</option>
+                    <option>Netherlands</option>
+                    <option>Sweden</option>
+                    <option>Ireland</option>
+                    <option>United States</option>
+                    <option>Canada</option>
+                    <option>Australia</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Treatment Interest</label>
+                <select required>
+                    <option value="">Select a treatment...</option>
+                    <option>Bariatric / Weight Loss Surgery</option>
+                    <option>Dental Implants & Smile Design</option>
+                    <option>Plastic & Aesthetic Surgery</option>
+                    <option>Hair Transplant</option>
+                    <option>Orthopedics & Spine Surgery</option>
+                    <option>Cardiology</option>
+                    <option>Eye Surgery / LASIK</option>
+                    <option>IVF & Fertility</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tell Us About Your Condition</label>
+                <textarea rows="3" placeholder="Describe your condition or questions..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary form-submit">
+                Submit Free Consultation →
+            </button>
+        </form>
+        <div class="form-success" id="modalFormSuccess">
+            <div class="check">✓</div>
+            <h4>Request Received!</h4>
+            <p>Our medical coordinator will contact you within 24 hours with a personalized treatment plan and pricing.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Modal
+    function openModal() {
+        document.getElementById('modalOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal(e) {
+        if (!e || e.target === document.getElementById('modalOverlay') || e.currentTarget.classList.contains('modal-close')) {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Form submission
+    function handleFormSubmit(e, formId) {
+        e.preventDefault();
+        const form = document.getElementById(formId);
+        const success = document.getElementById(formId + 'Success');
+        
+        // Here you would send the data to your CRM / backend
+        // Example: fetch('/api/leads', { method: 'POST', body: new FormData(form) })
+        
+        form.style.display = 'none';
+        success.classList.add('active');
+        
+        // Reset after 5 seconds
+        setTimeout(() => {
+            form.style.display = 'block';
+            success.classList.remove('active');
+            form.reset();
+        }, 5000);
+    }
+
+    // Smooth reveal animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.treatment-card, .hospital-card, .testimonial-card, .step, .why-feature').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>
