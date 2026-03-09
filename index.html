@@ -1234,20 +1234,20 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Full Name</label>
-                                <input type="text" placeholder="John Doe" required>
+                                <input type="text" name="name" placeholder="John Doe" required>
                             </div>
                             <div class="form-group">
                                 <label>Phone / WhatsApp</label>
-                                <input type="tel" placeholder="+44 7123 456789" required>
+                                <input type="tel" name="phone" placeholder="+44 7123 456789" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Email Address</label>
-                            <input type="email" placeholder="john@example.com" required>
+                            <input type="email" name="email" placeholder="john@example.com" required>
                         </div>
                         <div class="form-group">
                             <label>Treatment Interest</label>
-                            <select required>
+                            <select name="treatment" required>
                                 <option value="">Select a treatment...</option>
                                 <option>Bariatric / Weight Loss Surgery</option>
                                 <option>Dental Implants & Smile Design</option>
@@ -1262,7 +1262,7 @@
                         </div>
                         <div class="form-group">
                             <label>Brief Message (Optional)</label>
-                            <textarea rows="2" placeholder="Tell us about your condition..."></textarea>
+                            <textarea name="message" rows="2" placeholder="Tell us about your condition..."></textarea>
                         </div>
                         <button type="submit" class="btn-primary form-submit">
                             Send My Free Consultation Request →
@@ -1629,20 +1629,20 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" placeholder="John Doe" required>
+                    <input type="text" name="name" placeholder="John Doe" required>
                 </div>
                 <div class="form-group">
                     <label>Phone / WhatsApp</label>
-                    <input type="tel" placeholder="+44 7123 456789" required>
+                    <input type="tel" name="phone" placeholder="+44 7123 456789" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>Email Address</label>
-                <input type="email" placeholder="john@example.com" required>
+                <input type="email" name="email" placeholder="john@example.com" required>
             </div>
             <div class="form-group">
                 <label>Country</label>
-                <select required>
+                <select name="country" required>
                     <option value="">Select your country...</option>
                     <option>United Kingdom</option>
                     <option>Germany</option>
@@ -1658,7 +1658,7 @@
             </div>
             <div class="form-group">
                 <label>Treatment Interest</label>
-                <select required>
+                <select name="treatment" required>
                     <option value="">Select a treatment...</option>
                     <option>Bariatric / Weight Loss Surgery</option>
                     <option>Dental Implants & Smile Design</option>
@@ -1673,7 +1673,7 @@
             </div>
             <div class="form-group">
                 <label>Tell Us About Your Condition</label>
-                <textarea rows="3" placeholder="Describe your condition or questions..."></textarea>
+                <textarea name="message" rows="3" placeholder="Describe your condition or questions..."></textarea>
             </div>
             <button type="submit" class="btn-primary form-submit">
                 Submit Free Consultation →
@@ -1705,24 +1705,58 @@
         }
     }
 
-    // Form submission
+    // Form submission → Google Sheets
+    const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxM_bfZawRlAz1KjF8crjD2xCzckk5krSWhVJLkeJ_8coAVZzDZnv4Z4IAh1ek4yYZu8Q/exec';
+
     function handleFormSubmit(e, formId) {
         e.preventDefault();
         const form = document.getElementById(formId);
         const success = document.getElementById(formId + 'Success');
+        const submitBtn = form.querySelector('button[type="submit"]');
         
-        // Here you would send the data to your CRM / backend
-        // Example: fetch('/api/leads', { method: 'POST', body: new FormData(form) })
-        
-        form.style.display = 'none';
-        success.classList.add('active');
-        
-        // Reset after 5 seconds
-        setTimeout(() => {
-            form.style.display = 'block';
-            success.classList.remove('active');
-            form.reset();
-        }, 5000);
+        // Disable button while sending
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        // Collect form data
+        const data = {
+            name: form.querySelector('[name="name"]')?.value || '',
+            phone: form.querySelector('[name="phone"]')?.value || '',
+            email: form.querySelector('[name="email"]')?.value || '',
+            treatment: form.querySelector('[name="treatment"]')?.value || '',
+            country: form.querySelector('[name="country"]')?.value || '',
+            message: form.querySelector('[name="message"]')?.value || '',
+            source: formId === 'heroForm' ? 'Hero Form' : 'Modal Form'
+        };
+
+        // Send to Google Sheets
+        fetch(SHEETS_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            form.style.display = 'none';
+            success.classList.add('active');
+            setTimeout(() => {
+                form.style.display = 'block';
+                success.classList.remove('active');
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.textContent = formId === 'heroForm' 
+                    ? 'Send My Free Consultation Request →' 
+                    : 'Submit Free Consultation →';
+            }, 5000);
+        })
+        .catch(() => {
+            // no-cors always resolves, but just in case
+            alert('Something went wrong. Please try again or contact us via WhatsApp.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = formId === 'heroForm' 
+                ? 'Send My Free Consultation Request →' 
+                : 'Submit Free Consultation →';
+        });
     }
 
     // Smooth reveal animations
